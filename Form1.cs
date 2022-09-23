@@ -1,5 +1,5 @@
 using System;
-using System.Globalization; // needed?
+using System.Globalization; 
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -66,13 +66,13 @@ namespace terminal
         int extra_prize_money = 5;  // in cash(PLN) - change this variable if wrong
         int credentials_type;
 
-        // var niezbedne do ref aby mieÊ cenÍ biletu do zwrotu
+        // var to ref - return ticket 
         string canceled_ticket_number;
         DateTime cancel_ticket_date;
         double cancel_value;
         string canceled_ticket_info_line;
         List<int> canceled_tickets = new List<int>();
-        // var do wydruku zamkniecia zmiany
+        // var to close printing
         string data_series_start;
         string data_series_stop;
         double ticket_cash_people;
@@ -81,7 +81,7 @@ namespace terminal
         double cancel_ticket_cash_people = 0;
         double cancel_ticket_cash_bike = 0;
         double cancel_ticket_cash_extra = 0;
-        double ticket_cashless_pay; // podany przez usera
+        double ticket_cashless_pay; // user input
         double earn_summary;
         double return_summary;
         int ticket_first = 2147483646;
@@ -91,58 +91,43 @@ namespace terminal
         string strBuff = ((char)32).ToString();
         string strCR = ((char)13).ToString();	// Set Carriage Return code
         // arrays 
-        string[] TM_devices = new string[6] // serial_number : number of TM
+        string[] TM_devices = new string[1] // serial_number : number of TM
         {
             "8C9B02716AAAA1:A",
-            "861B01310AAAA1:B",
-            "8C9B02864AAAA1:C",
-            "861C01710AAAA1:D",
-            "8C9B02946AAAA1:E",
-            "8C9802110AAAA1:F",
         };
 
         string[] users_list = new string[16]
         {
-        "1111:1470",   // first is superuser - could be changed
-        "01:1986",
-        "02:1994",
-        "03:1999",
-        "04:1999",
-        "05:1993",
-        "06:1980",
-        "07:1998",
-        "08:1996",
-        "09:1974",
-        "10:2010",
-        "11:2011",
-        "12:2012",
-        "13:2013",
-        "14:2014",
-        "15:2015",
+        "1111:0000",   // first is superuser - could be changed here
+        "01:1111",
+        "02:1111",
+        "03:1111",
+        "04:1111",
+        "05:1111",
         };
 
         string[] stations_1 = new string[8]
         {
-            "åroda Wlkp.Miasto",
-            "åroda Wlkp. Wπsk",  
-            "S≥upia Wielka",
+            "≈öroda Wlkp.Miasto",
+            "≈öroda Wlkp. WƒÖsk",  
+            "S≈Çupia Wielka",
             "Annopole",
-            "P≥aczki",
-            "ånieciska",
+            "P≈Çaczki",
+            "≈önieciska",
             "Polwica",
-            "Zaniemyúl",
+            "Zaniemy≈õl",
         };
 
         string[] stations_2 = new string[8] // must have the same stations as the stations_1
         {
-            "åroda Wlkp.Miasto",
-            "åroda Wlkp. Wπsk",  
-            "S≥upia Wielka",
+            "≈öroda Wlkp.Miasto",
+            "≈öroda Wlkp. WƒÖsk",  
+            "S≈Çupia Wielka",
             "Annopole",
-            "P≥aczki",
-            "ånieciska",
+            "P≈Çaczki",
+            "≈önieciska",
             "Polwica",
-            "Zaniemyúl",
+            "Zaniemy≈õl",
         };
 
         public void Led_loop()
@@ -616,7 +601,7 @@ namespace terminal
             this.paper_ticket_single_START.Text = "";
             this.paper_ticket_single_DESTINATION.Text = "";
             this.label38.Text = "RODZ:";
-            this.label32.Text = "waøny w dniu:";
+            this.label32.Text = "wa≈ºny w dniu:";
             this.label42.Text = "........................................................";
             this.label52.Text = "w tym PTU 8% PLN";
             this.paper_ticket_single_ULG.Text = "";
@@ -634,7 +619,7 @@ namespace terminal
             cancel_ticket_cash_people = 0;
             cancel_ticket_cash_bike = 0;
             cancel_ticket_cash_extra = 0;
-            ticket_cashless_pay = 0; // podany przez usera
+            ticket_cashless_pay = 0; // user input
             earn_summary = 0;
             return_summary = 0;
             ticket_first = 2147483646;
@@ -652,7 +637,7 @@ namespace terminal
         public void wrong_date()
         {
             Thread.Sleep(5000);
-            MessageBox.Show("Data terminala musi byÊ ustawiona na poprawnπ!", "B≥Ídny czas!");
+            MessageBox.Show("Data terminala musi byƒá ustawiona na poprawnƒÖ!", "B≈Çƒôdny czas!");
         }       // one time thread
 
         // file operations
@@ -828,7 +813,7 @@ namespace terminal
             }
             catch (Exception e)
             {
-                MessageBox.Show("B≥πd przy pobieraniu zmiennych\n"+e);
+                MessageBox.Show("B≈ÇƒÖd przy pobieraniu zmiennych\n"+e);
                 return "";
             }
         }
@@ -858,7 +843,7 @@ namespace terminal
             }
             catch (Exception e)
             {
-                MessageBox.Show("B≥πd odczytywania danych z plikÛw na karcie!\n\n" + e.Message, file);
+                MessageBox.Show("B≈ÇƒÖd odczytywania danych z plik√≥w na karcie!\n\n" + e.Message, file);
                 return "";
             }
         }
@@ -869,7 +854,7 @@ namespace terminal
                 string line;
                 if (!File.Exists(file))
                 {
-                    MessageBox.Show("Brak plikÛw o zmianie!", file);
+                    MessageBox.Show("Brak plik√≥w o zmianie!", file);
                     return false;
                 }
                 FileStream fm = new FileStream(file, FileMode.Open, FileAccess.Read);
@@ -902,7 +887,7 @@ namespace terminal
             }
             catch (Exception e)
             {
-                MessageBox.Show("B≥πd odczytywania danych z plikÛw na karcie!\n\n" + e.Message, file);
+                MessageBox.Show("B≈ÇƒÖd odczytywania danych z plik√≥w na karcie!\n\n" + e.Message, file);
                 return false;
             }
         }
@@ -938,7 +923,6 @@ namespace terminal
                     {
                         cash_extra = double.Parse(words[8]);
                     }
-                    //MessageBox.Show(cash_pln + " " + cash_extra);
 
                     if (words[12] == "True")    //bike
                     {
@@ -974,7 +958,7 @@ namespace terminal
             }
             catch (Exception e)
             {
-                MessageBox.Show("B≥πd odczytywania danych z plikÛw na karcie!\n\n" + e.Message, file);
+                MessageBox.Show("B≈ÇƒÖd odczytywania danych z plik√≥w na karcie!\n\n" + e.Message, file);
                 return false;
             }
         }
@@ -1006,7 +990,7 @@ namespace terminal
             }
             catch (Exception e)
             {
-                MessageBox.Show("B≥πd odczytywania danych z plikÛw na karcie!\n\n" + e.Message, file);
+                MessageBox.Show("B≈ÇƒÖd odczytywania danych z plik√≥w na karcie!\n\n" + e.Message, file);
             }
         }
         public double[] get_billings_at_closing(string filename, char delimiter)
@@ -1381,7 +1365,7 @@ namespace terminal
             }
             catch (FileNotFoundException)
             {
-                return false; // if file isnt exists month weren't open
+                return false; // if file isnt exists month is weren't open
             }
                 return is_closed;
         }
@@ -1439,7 +1423,6 @@ namespace terminal
             int nr_close_cash = 0;
             double month_cashless_pay = 0;
 
-            // TODO sprawdzenie regionu - jeúli nie polski - wywalaÊ b≥πd!
 
             DateTime date_open_cash = DateTime.Now;
             DateTime date_close_cash = DateTime.Now;
@@ -1495,7 +1478,7 @@ namespace terminal
                 if (nr_open_cash == 0 || nr_close_cash == 0)
                 {
                     type = "error";
-                    info = "B≥πd w odczytywaniu numeru zmiany";
+                    info = "B≈ÇƒÖd w odczytywaniu numeru zmiany";
                     DialogResult dialogresult = MessageBox.Show(info);
                     string tempstring = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), type, curr_user, counter_series.ToString(), "zamkniecie miesiaca" + info);
                     saveToFile(CSV_filename_logs, tempstring, false);
@@ -1520,8 +1503,8 @@ namespace terminal
             }
             catch (Exception e)
             {
-                MessageBox.Show("B≥πd:\n"+e, "get_billings");
-                info = "B≥πd w odczytywaniu pieniedzy";
+                MessageBox.Show("B≈ÇƒÖd:\n"+e, "get_billings");
+                info = "B≈ÇƒÖd w odczytywaniu pieniedzy";
                 //DialogResult dialogresult = MessageBox.Show(info);
                 string tempstring = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), type, curr_user, counter_series.ToString(), "zamkniecie miesiaca" + info);
                 saveToFile(CSV_filename_logs, tempstring, false);
@@ -1544,7 +1527,7 @@ namespace terminal
             if (nRet != PrinterLibNet.Def.PRN_NORMAL)
             {
                 ShowErrorMessage("PRNOpen", nRet);
-                info = "B≥πd na linii TM - drukarka";
+                info = "B≈ÇƒÖd na linii TM - drukarka";
                 DialogResult dialogresult = MessageBox.Show(info);
                 string tempstring = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), type, curr_user, counter_series.ToString(), "zamkniecie miesiaca" + info);
                 saveToFile(CSV_filename_logs, tempstring, false);
@@ -1555,7 +1538,7 @@ namespace terminal
             if (nRet != PrinterLibNet.Def.PRN_NORMAL)
             {
                 ShowErrorMessage("PRNGetPrinterProperty", nRet);
-                info = "B≥πd na linii TM - drukarka - pobieranie zmiennych";
+                info = "B≈ÇƒÖd na linii TM - drukarka - pobieranie zmiennych";
                 DialogResult dialogresult = MessageBox.Show(info);
                 string tempstring = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), type, curr_user, counter_series.ToString(), "zamkniecie miesiaca" + info);
                 saveToFile(CSV_filename_logs, tempstring, false);
@@ -1709,7 +1692,7 @@ namespace terminal
             nRet = PrinterLibNet.Api.PRNTextOut(1, strCR);
 
             //end of first raport
-            MessageBox.Show("Zaraz nastπpi wydruk dotacji.", "Oderwij taúmÍ");
+            MessageBox.Show("Zaraz nastƒÖpi wydruk dotacji.", "Oderwij ta≈õmƒô");
 
             double refund_single_ticket_counter = 0;
             double refund_single_ticket_cash = 0;
@@ -1733,7 +1716,7 @@ namespace terminal
             }
             catch (Exception e)
             {
-                MessageBox.Show("B≥πd:\n"+e, "get_billings");
+                MessageBox.Show("B≈ÇƒÖd:\n"+e, "get_billings");
                 return false;
             }
             for (int i = 0; i < 18; i = i + 2)
@@ -1796,7 +1779,7 @@ namespace terminal
             string temp_string_close = vars_ToCSV(delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), counter_series.ToString(), curr_user, "close_month");
             if (!saveToFile(CSV_filename_series_logs, temp_string_close, false))
             {
-                MessageBox.Show("Nie uda≥o siÍ zapisaÊ informacji o zamkniÍciu zmiany.\nZrestartuj terminal i sprÛbuj ponownie zamknπÊ miesiπc.","B≥πd");
+                MessageBox.Show("Nie uda≈Ço siƒô zapisaƒá informacji o zamkniƒôciu zmiany.\nZrestartuj terminal i spr√≥buj ponownie zamknƒÖƒá miesiƒÖc.","B≈ÇƒÖd");
             }
             type = "info";
             info = "zamknieto";
@@ -1819,7 +1802,7 @@ namespace terminal
 
             if (!readVarfromCSV(CSV_filename_counters, CSV_delimiter))   // get last saved counters of ticket & cash series
             {
-                MessageBox.Show("Wystπpi≥ problem z dostÍpem do plikÛw. Aplikacja nie bÍdzie dzia≥a≥a poprawnie!", "B≥πd I/O");
+                MessageBox.Show("WystƒÖpi≈Ç problem z dostƒôpem do plik√≥w. Aplikacja nie bƒôdzie dzia≈Ça≈Ça poprawnie!", "B≈ÇƒÖd I/O");
             }
 
             if (debug)
@@ -1881,7 +1864,7 @@ namespace terminal
                     return;
                 }
             }
-            MessageBox.Show("Numery seryjne TM nie zgadzajπ siÍ", "B≥πd");
+            MessageBox.Show("Numery seryjne TM nie zgadzajƒÖ siƒô", "B≈ÇƒÖd");
             this.button1.Enabled = false;
         }   
         private void panel1_GotFocus(object sender, EventArgs e)
@@ -1907,13 +1890,13 @@ namespace terminal
             string temp_string = vars_ToCSV(CSV_delimiter, counter_tickets.ToString(), counter_series.ToString(), bool_open_cash.ToString());
             if (!saveToFile(CSV_filename_counters, temp_string, true))
             {
-                MessageBox.Show("B≥πd zapisu otwarcia zmiany!", "B≥πd I/O");
+                MessageBox.Show("B≈ÇƒÖd zapisu otwarcia zmiany!", "B≈ÇƒÖd I/O");
             }
             for (int i = 0; i < users_list.Length; i++)
             {
                 if (this.dateTimePicker1.Value < DateTime.Parse("2022-01-01") && i != 0)  // look for date at start and disable logging
                 {
-                    MessageBox.Show("Data terminala musi byÊ ponownie ustawiona na poprawnπ!\nZaloguj siÍ jako admin i zmieÒ czas!", "B≥Ídny czas!");
+                    MessageBox.Show("Data terminala musi byƒá ponownie ustawiona na poprawnƒÖ!\nZaloguj siƒô jako admin i zmie≈Ñ czas!", "B≈Çƒôdny czas!");
                     return;
                 }
                 string[] words  = users_list[i].Split(':');
@@ -1924,12 +1907,12 @@ namespace terminal
                     if (bool_open_cash) // if cash is open!
                     {
                         this.label1.Text = "Otwarta kasa";
-                        this.label2.Text = "Koontynuuj zmianÍ nr: ";
+                        this.label2.Text = "Koontynuuj zmianƒô nr: ";
                     }
                     else
                     {
                         this.label1.Text = "Otwarcie zmiany";
-                        this.label2.Text = "Czy chcesz otworzyÊ zmianÍ nr: ";
+                        this.label2.Text = "Czy chcesz otworzyƒá zmianƒô nr: ";
                     }
 
                     
@@ -1941,9 +1924,9 @@ namespace terminal
                     {
                         month_is_closed = true;
                         this.button3.Enabled = false;
-                        this.label2.Text = "Miesiπc zosta≥ juø zamkniÍty";
+                        this.label2.Text = "MiesiƒÖc zosta≈Ç ju≈º zamkniƒôty";
                         this.open_cash.Visible = false;
-                        this.button5.Text = "WznÛw miesiπc";
+                        this.button5.Text = "Wzn√≥w miesiƒÖc";
                     }
                     else
                     {
@@ -1951,7 +1934,7 @@ namespace terminal
                         this.button3.Enabled = true;
                         this.open_cash.Visible = true;
                         this.label2.Text = "Aktualna zmiana:";
-                        this.button5.Text = "ZakoÒczenie miesiπca";
+                        this.button5.Text = "Zako≈Ñczenie miesiƒÖca";
                     }
                     if (i == 0)                 // superuser
                     {
@@ -1973,8 +1956,8 @@ namespace terminal
             }
             if (!logged)
             {
-                DialogResult dialogresult = MessageBox.Show("NIE uda≥o siÍ zalogowaÊ.");
-                this.user_passwd.Text = ""; //resetuje has≥o
+                DialogResult dialogresult = MessageBox.Show("NIE uda≈Ço siƒô zalogowaƒá.");
+                this.user_passwd.Text = ""; //reset passwd 
                 this.user_passwd.Focus();
             }
         }
@@ -2003,12 +1986,12 @@ namespace terminal
         {
             if (!verify_previous_month_closed(CSV_filename_series_logs, CSV_delimiter) && !bool_open_cash)
             {
-                MessageBox.Show("Poprzedni miesiπc nie zosta≥ zamkniÍty!","Brak moøliwoúci otwarcia");
+                MessageBox.Show("Poprzedni miesiƒÖc nie zosta≈Ç zamkniƒôty!","Brak mo≈ºliwo≈õci otwarcia");
                 return;
             }
             panel2.Visible = false;
             panel3.Visible = true;
-            if (!bool_open_cash)    // otwarcie nowej zmiany
+            if (!bool_open_cash)    // open new
             {
                 string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), counter_series.ToString(), curr_user, "open");
                 saveToFile(CSV_filename_series_logs, temp_string, false);
@@ -2016,7 +1999,7 @@ namespace terminal
                 temp_string = vars_ToCSV(CSV_delimiter, counter_tickets.ToString(), counter_series.ToString(), bool_open_cash.ToString());
                 if (!saveToFile(CSV_filename_counters, temp_string, true))
                 {
-                    MessageBox.Show("B≥πd zapisu otwarcia zmiany!", "B≥πd I/O");
+                    MessageBox.Show("B≈ÇƒÖd zapisu otwarcia zmiany!", "B≈ÇƒÖd I/O");
                 }
             }
 
@@ -2035,10 +2018,10 @@ namespace terminal
         {
             if (bool_open_cash)
             {
-                MessageBox.Show("Nie moøna zrobiÊ podsumowania miesiπca bez zakoÒczenia bieøπcej zmiany!!", "ZAMKNIJ ZMIAN ");
+                MessageBox.Show("Nie mo≈ºna zrobiƒá podsumowania miesiƒÖca bez zako≈Ñczenia bie≈ºƒÖcej zmiany!!", "ZAMKNIJ ZMIANƒò");
                 return;
             }
-            if (!month_is_closed)   // if false on button "zakoÒczenie miesiπca"
+            if (!month_is_closed)   // if false on button "zako≈Ñczenie miesiƒÖca"
             {
                 if (CSV_filename_tickets_month == "")
                 {
@@ -2052,24 +2035,24 @@ namespace terminal
                 }
                 if (!File.Exists(CSV_filename_tickets_month))
                 {
-                    MessageBox.Show("Nie da sie zamknπÊ miesiπca, ktÛry nie istnieje!", "Brak historii");
+                    MessageBox.Show("Nie da sie zamknƒÖƒá miesiƒÖca, kt√≥ry nie istnieje!", "Brak historii");
                     return;
                 }
                 // 
                 if (!close_month_of_selling(CSV_delimiter, CSV_filename_tickets_month, cancel_filename_flash, CSV_filename_series_logs))
                 {
-                    MessageBox.Show("Nie uda≥o siÍ zamknπÊ miesiπca.","B≥πd.");
+                    MessageBox.Show("Nie uda≈Ço siƒô zamknƒÖƒá miesiƒÖca.","B≈ÇƒÖd.");
                 }
             }
-            else // if true on button "wznÛw miesiπc"
+            else // if true on button "wzn√≥w miesiƒÖc"
             {
                 string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), counter_series.ToString(), curr_user, "renew_month");
                 saveToFile(CSV_filename_series_logs, temp_string, false);
-                MessageBox.Show("Poprzedni wydruk zamkniÍcia miesiπca w tym momencie sta≥ siÍ nieaktualny.", "Wznowiono.");
+                MessageBox.Show("Poprzedni wydruk zamkniƒôcia miesiƒÖca w tym momencie sta≈Ç siƒô nieaktualny.", "Wznowiono.");
             }
             this.panel2.Visible = false;
             this.panel1.Visible = true;
-            //MessageBox.Show("Modu≥ jeszcze nie zosta≥ zaimplementowany", " W trakcie realizacji");
+            //MessageBox.Show("Modu≈Ç jeszcze nie zosta≈Ç zaimplementowany", " W trakcie realizacji");
         }
         private void panel6_GotFocus(object sender, EventArgs e)    //panel with fv
         {
@@ -2154,8 +2137,8 @@ namespace terminal
 
         private void ticket_single_Click(object sender, EventArgs e)    // choosen single ticket from main menu
         {
-            panel3.Visible = false; //ekran wyboru biletÛw
-            panel6_single.Visible = true; //ekran wyboru dot. bil. jednorazowego
+            panel3.Visible = false; //panel with tickets
+            panel6_single.Visible = true; //single ticket panel
             ticket_type.Text = "T";
             bool_ticket_T = true;
             was_printed = false;
@@ -2164,8 +2147,8 @@ namespace terminal
         }
         private void ticket_return_Click(object sender, EventArgs e)    // choosen return ticket from main menu
         {
-            panel3.Visible = false; //ekran wyboru biletÛw
-            panel6_single.Visible = true; //ekran wyboru dot. bil. jednorazowego
+            panel3.Visible = false;
+            panel6_single.Visible = true;
             ticket_type.Text = "T/P";
             bool_ticket_TP = true;
             was_printed = false;
@@ -2174,8 +2157,8 @@ namespace terminal
         }
         private void ticket_month_Click(object sender, EventArgs e)     // choosen monthly ticket from main menu
         {
-            panel3.Visible = false; //ekran wyboru biletÛw
-            panel6_monthly.Visible = true; // miesieczny
+            panel3.Visible = false; 
+            panel6_monthly.Visible = true;
             bool_ticket_month = true;
             was_printed = false;
             string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "info", curr_user, counter_series.ToString(), "miesieczny");
@@ -2183,24 +2166,24 @@ namespace terminal
         }
         private void ticket_bike_Click(object sender, EventArgs e)      // choosen bike ticket from main menu
         {
-            panel3.Visible = false; //ekran wyboru biletÛw
-            panel7.Visible = true; // rower
+            panel3.Visible = false; 
+            panel7.Visible = true; 
             bool_ticket_bike = true;
             string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "info", curr_user, counter_series.ToString(), "rower");
             saveToFile(CSV_filename_logs, temp_string, false);
         }
         private void ticket_group_Click(object sender, EventArgs e)     // choosen group ticket from main menu
         {
-            panel3.Visible = false; //ekran wyboru biletÛw
-            panel6_group.Visible = true; // grupa
+            panel3.Visible = false; 
+            panel6_group.Visible = true; 
             this.bool_ticket_group = true;
             string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "info", curr_user, counter_series.ToString(), "grupa");
             saveToFile(CSV_filename_logs, temp_string, false);
         }
         private void ticket_options_Click(object sender, EventArgs e)
         {
-            panel3.Visible = false; //ekran wyboru biletÛw
-            panel4.Visible = true; // menu opcji
+            panel3.Visible = false;
+            panel4.Visible = true; 
             string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "info", curr_user, counter_series.ToString(), "opcje");
             saveToFile(CSV_filename_logs, temp_string, false);
         }
@@ -2211,7 +2194,7 @@ namespace terminal
             curr_user = "";
             if (bool_open_cash)
             {
-                MessageBox.Show("Jeúli zakoÒczono sprzedaø biletÛw proszÍ pamiÍtaÊ o zamkniÍciu zmiany", "Zmiana jest nadal otwarta");
+                MessageBox.Show("Je≈õli zako≈Ñczono sprzeda≈º bilet√≥w proszƒô pamiƒôtaƒá o zamkniƒôciu zmiany", "Zmiana jest nadal otwarta");
             }
             string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "info", curr_user, counter_series.ToString(), "wyloguj");
             saveToFile(CSV_filename_logs, temp_string, false);
@@ -2219,7 +2202,7 @@ namespace terminal
         }
         private void opt_back_Click(object sender, EventArgs e)
         {
-            this.panel4.Visible = false;     // cofniecie do wyboru biletÛw
+            this.panel4.Visible = false;   
             this.panel3.Visible = true;
             this.panel9.Visible = false;
             string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "info", curr_user, counter_series.ToString(), "cofnij - z menu opcji");
@@ -2235,7 +2218,7 @@ namespace terminal
         private void button17_Click(object sender, EventArgs e) // go to menu from single ticket
         {
             panel3.Visible = true;
-            panel6_single.Visible = false;      // panel poúwiadczeÒ
+            panel6_single.Visible = false;      
             this.clear();
             string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "info", curr_user, counter_series.ToString(), "cofnij - bilet T/TP");
             saveToFile(CSV_filename_logs, temp_string, false);
@@ -2603,25 +2586,25 @@ namespace terminal
             if (stations_start.SelectedItem.ToString() == stations_destination.SelectedItem.ToString())
             {
                 type = "warning";
-                info = "Stacja docelowa musi byÊ rÛøna od stacji poczπtkowej";
+                info = "Stacja docelowa musi byƒá r√≥≈ºna od stacji poczƒÖtkowej";
                 DialogResult dialogresult = MessageBox.Show(info);
             }
             else if (numericUpDown1.Value == 0 && numericUpDown2.Value == 0 && numericUpDown3.Value == 0)
             {
                 type = "warning";
-                info = "Musi byÊ wybrany co najmniej jeden rodzaj biletu";
+                info = "Musi byƒá wybrany co najmniej jeden rodzaj biletu";
                 DialogResult dialogresult = MessageBox.Show(info);
             }
             else if ((numericUpDown2.Value >= 1) && relief == 0)
             {
                 type = "warning";
-                info = "Nie wybrano zniøki";
+                info = "Nie wybrano zni≈ºki";
                 DialogResult dialogresult = MessageBox.Show(info);
             }/*
             else if((numericUpDown3.Value == 1) || (numericUpDown3.Value == 3))
             {
                 type = "warning";
-                info = "Wprowadzono niepoprawnπ wartoúÊ!\nPoprawne wartoúci to: 0,2,4";
+                info = "Wprowadzono niepoprawnƒÖ warto≈õƒá!\nPoprawne warto≈õci to: 0,2,4";
                 DialogResult dialogresult = MessageBox.Show(info);
             }*/
             else
@@ -2651,17 +2634,17 @@ namespace terminal
             string type = "warning";
             if (comboBox2.SelectedItem.ToString() == comboBox1.SelectedItem.ToString())
             {
-                info = "Stacja docelowa musi byÊ rÛøna od stacji poczπtkowej";
+                info = "Stacja docelowa musi byƒá r√≥≈ºna od stacji poczƒÖtkowej";
                 DialogResult dialogresult = MessageBox.Show(info);
             }
             else if (numericUpDown6.Value == 0 && numericUpDown5.Value == 0 && numericUpDown4.Value == 0)
             {
-                info = "Musi byÊ wybrany co najmniej jeden rodzaj biletu";
+                info = "Musi byƒá wybrany co najmniej jeden rodzaj biletu";
                 DialogResult dialogresult = MessageBox.Show(info);
             }
             else if ((numericUpDown5.Value >= 1) && relief == 0)
             {
-                info = "Nie wybrano zniøki";
+                info = "Nie wybrano zni≈ºki";
                 DialogResult dialogresult = MessageBox.Show(info);
             }
             else
@@ -2690,7 +2673,7 @@ namespace terminal
             string type = "warning";
             if (this.reliefs_size_monthly.Enabled && relief == 0)
             {
-                info = "Nie wybrano zniøki";
+                info = "Nie wybrano zni≈ºki";
                 DialogResult dialogresult = MessageBox.Show(info);
             }
             else
@@ -2853,7 +2836,7 @@ namespace terminal
             if (!type)          //group
             {
                 this.paper_ticket_single_TYPE.Text = "GRUPOWY";
-                this.label38.Text = "BEZP£:";
+                this.label38.Text = "BEZP≈Å:";
                 if (radioButton4.Checked)
                 {
                     this.paper_ticket_single_POC.Text = "O";
@@ -2957,8 +2940,8 @@ namespace terminal
             this.label46.Visible = false;
             this.paper_ticket_single_RODZ.Visible = false;
             this.paper_ticket_single_DATA.Visible = false;
-            this.paper_ticket_single_TYPE.Text = "SIECIOWY MIESI CZNY IMIENNY";				
-            this.label32.Text = "ImiÍ i nazwisko:";
+            this.paper_ticket_single_TYPE.Text = "SIECIOWY MIESIƒòCZNY IMIENNY";				
+            this.label32.Text = "Imiƒô i nazwisko:";
             this.paper_ticket_single_START.Text = DateTime.Now.ToString("yyyy-MM-dd");      // date at monthly ticket from 
             this.paper_ticket_single_DESTINATION.Text = DateTime.Now.AddDays(DateTime.DaysInMonth(actual_year, actual_month)).ToString("yyyy-MM-dd");
             this.paper_ticket_single_PLN.Text = String.Format("{0:0.00}", ticket_prize);
@@ -2992,9 +2975,9 @@ namespace terminal
             this.label45.Visible = false;
             this.label63.Visible = true;
 
-            this.label42.Text = "waøny w jednπ stronÍ ≥πcznie z biletem na przejazd";
+            this.label42.Text = "wa≈ºny w jednƒÖ stronƒô ≈ÇƒÖcznie z biletem na przejazd";
             this.paper_ticket_single_ULG.Text = this.numericUpDown7.Value.ToString();
-            this.paper_ticket_single_TYPE.Text = "NA PRZEW”Z ROWERU";
+            this.paper_ticket_single_TYPE.Text = "NA PRZEW√ìZ ROWERU";
             this.paper_ticket_single_DATA.Text = DateTime.Now.ToString("yyyy-MM-dd");
             this.label52.Text = "w tym PTU 23% PLN";
             
@@ -3015,20 +2998,20 @@ namespace terminal
                         {
                             if (!saveToFile(CSV_filename_tickets_series, temp_string, false))
                             {
-                                MessageBox.Show("B≥πd zapisu!\n"+CSV_filename_tickets_series);
+                                MessageBox.Show("B≈ÇƒÖd zapisu!\n"+CSV_filename_tickets_series);
                             }
                             if (!saveToFile(CSV_filename_tickets_month, temp_string, false))
                             {
-                                MessageBox.Show("B≥πd zapisu!\n"+CSV_filename_tickets_month);
+                                MessageBox.Show("B≈ÇƒÖd zapisu!\n"+CSV_filename_tickets_month);
                             }
                             if (!saveToFile(CSV_filename_tickets_month_SD, temp_string, false))
                             {
-                                MessageBox.Show("B≥πd zapisu!\n"+ CSV_filename_tickets_month_SD);
+                                MessageBox.Show("B≈ÇƒÖd zapisu!\n"+ CSV_filename_tickets_month_SD);
                             }
                             temp_string = vars_ToCSV(CSV_delimiter, counter_tickets.ToString(), counter_series.ToString(), bool_open_cash.ToString());
                             if (!saveToFile(CSV_filename_counters, temp_string, true))
                             {
-                                MessageBox.Show("B≥πd zapisu!", "B≥πd I/O");
+                                MessageBox.Show("B≈ÇƒÖd zapisu!", "B≈ÇƒÖd I/O");
                             }
                         }
                         this.panel6.Visible = false;    // panel with fv
@@ -3041,13 +3024,13 @@ namespace terminal
                     }
                     else // in case of trouble reset printer driver
                     {
-                        MessageBox.Show("Wystπpi≥ b≥πd z wydrukowaniem. SprÛbuj ponownie");
+                        MessageBox.Show("WystƒÖpi≈Ç b≈ÇƒÖd z wydrukowaniem. Spr√≥buj ponownie");
                         PrinterLibNet.Api.PRNClose();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("B≥πd drukarki");
+                    MessageBox.Show("B≈ÇƒÖd drukarki");
                 }
             }
             else if(!was_printed && panel8.Visible)  // ticket if not ENTER
@@ -3115,20 +3098,20 @@ namespace terminal
             }
         }
 
-        // THE MOST IMPORTANT PART!!!
+        // THE MOST IMPORTANT PART!!!  - PRICES
         private double gen_ticket_prize(string station_start, string station_destination, string type, bool is_special, int relief_size, ref double relief_money)  // relief_size == -1 - family ticket
         {
-            // åroda Wlkp Miasto
+            // ≈öroda Wlkp Miasto
             Dictionary<string, int> sroda_miasto_norm_t = new Dictionary<string, int>();
             Dictionary<string, int> sroda_miasto_norm_tp = new Dictionary<string, int>();
             Dictionary<string, int> sroda_miasto_norm_t_ok = new Dictionary<string, int>();
             Dictionary<string, int> sroda_miasto_norm_tp_ok = new Dictionary<string, int>();
-            // åroda Wlkp Wπsk.
+            // ≈öroda Wlkp WƒÖsk.
             Dictionary<string, int> sroda_wask_norm_t = new Dictionary<string, int>();
             Dictionary<string, int> sroda_wask_norm_tp = new Dictionary<string, int>();
             Dictionary<string, int> sroda_wask_norm_t_ok = new Dictionary<string, int>();
             Dictionary<string, int> sroda_wask_norm_tp_ok = new Dictionary<string, int>();
-            // S≥upia Wielka
+            // S≈Çupia Wielka
             Dictionary<string, int> slupia_wielka_norm_t = new Dictionary<string, int>();
             Dictionary<string, int> slupia_wielka_norm_tp = new Dictionary<string, int>();
             Dictionary<string, int> slupia_wielka_norm_t_ok = new Dictionary<string, int>();
@@ -3138,12 +3121,12 @@ namespace terminal
             Dictionary<string, int> annopole_norm_tp = new Dictionary<string, int>();
             Dictionary<string, int> annopole_norm_t_ok = new Dictionary<string, int>();
             Dictionary<string, int> annopole_norm_tp_ok = new Dictionary<string, int>();
-            // P≥aczki
+            // P≈Çaczki
             Dictionary<string, int> placzki_norm_t = new Dictionary<string, int>();
             Dictionary<string, int> placzki_norm_tp = new Dictionary<string, int>();
             Dictionary<string, int> placzki_norm_t_ok = new Dictionary<string, int>();
             Dictionary<string, int> placzki_norm_tp_ok = new Dictionary<string, int>();
-            // ånieciska
+            // ≈önieciska
             Dictionary<string, int> snieciska_norm_t = new Dictionary<string, int>();
             Dictionary<string, int> snieciska_norm_tp = new Dictionary<string, int>();
             Dictionary<string, int> snieciska_norm_t_ok = new Dictionary<string, int>();
@@ -3153,14 +3136,14 @@ namespace terminal
             Dictionary<string, int> polwica_norm_tp = new Dictionary<string, int>();
             Dictionary<string, int> polwica_norm_t_ok = new Dictionary<string, int>();
             Dictionary<string, int> polwica_norm_tp_ok = new Dictionary<string, int>();
-            // Zaniemyúl
+            // Zaniemy≈õl
             Dictionary<string, int> zaniemysl_norm_t = new Dictionary<string, int>();
             Dictionary<string, int> zaniemysl_norm_tp = new Dictionary<string, int>();
             Dictionary<string, int> zaniemysl_norm_t_ok = new Dictionary<string, int>();
             Dictionary<string, int> zaniemysl_norm_tp_ok = new Dictionary<string, int>();
 
 
-            // åroda Wlkp Miasto
+            // ≈öroda Wlkp Miasto
             sroda_miasto_norm_t.Add(stations_1[1], 7);
             sroda_miasto_norm_t.Add(stations_1[2], 7);
             sroda_miasto_norm_t.Add(stations_1[3], 10);
@@ -3189,7 +3172,7 @@ namespace terminal
             sroda_miasto_norm_tp_ok.Add(stations_1[5], 50);
             sroda_miasto_norm_tp_ok.Add(stations_1[6], 50);
             sroda_miasto_norm_tp_ok.Add(stations_1[7], 50); // TP OK
-            //åroda Wlkp Wπsk.
+            //≈öroda Wlkp WƒÖsk.
             sroda_wask_norm_t.Add(stations_1[0], 7);
             sroda_wask_norm_t.Add(stations_1[2], 7);
             sroda_wask_norm_t.Add(stations_1[3], 10);
@@ -3218,7 +3201,7 @@ namespace terminal
             sroda_wask_norm_tp_ok.Add(stations_1[5], 50);
             sroda_wask_norm_tp_ok.Add(stations_1[6], 50);
             sroda_wask_norm_tp_ok.Add(stations_1[7], 50);
-            // S≥upia Wielka
+            // S≈Çupia Wielka
             slupia_wielka_norm_t.Add(stations_1[0], 7);
             slupia_wielka_norm_t.Add(stations_1[1], 7);
             slupia_wielka_norm_t.Add(stations_1[3], 7);
@@ -3276,7 +3259,7 @@ namespace terminal
             annopole_norm_tp_ok.Add(stations_1[5], 40);
             annopole_norm_tp_ok.Add(stations_1[6], 50);
             annopole_norm_tp_ok.Add(stations_1[7], 50);    // tp ok
-            //P≥aczki
+            //P≈Çaczki
             placzki_norm_t.Add(stations_1[0], 21);
             placzki_norm_t.Add(stations_1[1], 21);
             placzki_norm_t.Add(stations_1[2], 14);
@@ -3305,7 +3288,7 @@ namespace terminal
             placzki_norm_tp_ok.Add(stations_1[5], 20);
             placzki_norm_tp_ok.Add(stations_1[6], 40);
             placzki_norm_tp_ok.Add(stations_1[7], 50);    // tp ok
-            //ånieciska
+            //≈önieciska
             snieciska_norm_t.Add(stations_1[0], 28);
             snieciska_norm_t.Add(stations_1[1], 28);
             snieciska_norm_t.Add(stations_1[2], 21);
@@ -3363,7 +3346,7 @@ namespace terminal
             polwica_norm_tp_ok.Add(stations_1[4], 40);
             polwica_norm_tp_ok.Add(stations_1[5], 20);
             polwica_norm_tp_ok.Add(stations_1[7], 20);    // tp ok
-            //Zaniemyúl
+            //Zaniemy≈õl
             zaniemysl_norm_t.Add(stations_1[0], 30);
             zaniemysl_norm_t.Add(stations_1[1], 30);
             zaniemysl_norm_t.Add(stations_1[2], 30);
@@ -3528,7 +3511,7 @@ namespace terminal
                    ticket_prize = placzki_norm_tp_ok[station_destination];
                }
             }
-            else if (station_start == stations_1[5])  // únieciska
+            else if (station_start == stations_1[5])  // ≈õnieciska
             {
                if (type == "T" && !is_special)
                {
@@ -3566,7 +3549,7 @@ namespace terminal
                    ticket_prize = polwica_norm_tp_ok[station_destination];
                }
             }
-            else if(station_start == stations_1[7])  // zaniemyúl
+            else if(station_start == stations_1[7])  // zaniemy≈õl
             {
                if (type == "T" && !is_special)
                {
@@ -3624,7 +3607,7 @@ namespace terminal
             this.panel9.Focus();
             this.panel5.Visible = false;
             this.comboBox3.Visible = false;
-            this.credentials_first.Text = "niewykorzystany przez osÛb:";
+            this.credentials_first.Text = "niewykorzystany przez os√≥b:";
             this.panel10.Visible = true;
             was_printed = false;
             credentials_type = 2;
@@ -3643,7 +3626,7 @@ namespace terminal
             this.textBox10.Visible = true;
             this.comboBox3.Visible = false;
             this.textBox7.Visible = false;
-            this.label64.Text = "Pociπg nr:";
+            this.label64.Text = "PociƒÖg nr:";
             credentials_type = 3;
             string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "info", curr_user, counter_series.ToString(), "pociag opozniony");
             saveToFile(CSV_filename_logs, temp_string, false);
@@ -3680,7 +3663,7 @@ namespace terminal
 
         private void opt_prices_Click(object sender, EventArgs e) // price list
         {
-            //MessageBox.Show("Brak moøliwoúci wydrukowania cennikÛw.", "Us≥uga wy≥πczona.");
+            //MessageBox.Show("Brak mo≈ºliwo≈õci wydrukowania cennik√≥w.", "Us≈Çuga wy≈ÇƒÖczona.");
             was_printed = false;
             
             this.panel4.Visible = false;
@@ -3690,7 +3673,7 @@ namespace terminal
         }
         private void opt_return_ticket_Click(object sender, EventArgs e) // get back ticket
         {
-            //MessageBox.Show("Brak moøliwoúci anulowania biletu", "Us≥uga wy≥πczona.");    // OK
+            //MessageBox.Show("Brak mo≈ºliwo≈õci anulowania biletu", "Us≈Çuga wy≈ÇƒÖczona.");    // OK
             this.panel11.Visible = true;
             this.panel4.Visible = false;
             string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "info", curr_user, counter_series.ToString(), "anulowanie biletu");
@@ -3733,7 +3716,7 @@ namespace terminal
                     }
                     else
                     {
-                        info = "Ten bilet by≥ juø zwrÛcony";
+                        info = "Ten bilet by≈Ç ju≈º zwr√≥cony";
                         type = "warning";
                         MessageBox.Show(info);
                     }
@@ -3741,14 +3724,14 @@ namespace terminal
                 else if (earlier_datatime.CompareTo(cancel_ticket_date) == 1)
                 {
                     type = "warning";
-                    info = "Czas na zwrot tego biletu minπ≥.";
-                    MessageBox.Show(info , "B≥πd");
+                    info = "Czas na zwrot tego biletu minƒÖ≈Ç.";
+                    MessageBox.Show(info , "B≈ÇƒÖd");
                 }
                 else
                 {
                     type = "warning";
-                    info = "B≥πd odczytu plikÛw";
-                    MessageBox.Show(info, "B≥πd");
+                    info = "B≈ÇƒÖd odczytu plik√≥w";
+                    MessageBox.Show(info, "B≈ÇƒÖd");
                 }
             }
             catch (Exception d)
@@ -3770,13 +3753,13 @@ namespace terminal
                 canceled_tickets.Add(int.Parse(ticket_to_cancel.Text));
                 if (!saveToFile(CSV_filename_canceled_SD, canceled_ticket_info_line, false))
                 {
-                    info = "B≥πd zapisu!";
+                    info = "B≈ÇƒÖd zapisu!";
                     MessageBox.Show(info +"\n"+ CSV_filename_canceled_SD);
                 }
                 if (!saveToFile(cancel_filename_flash, canceled_ticket_info_line, false))
                 {
-                    info = "B≥πd zapisu!";
-                    MessageBox.Show(info, "B≥πd I/O");
+                    info = "B≈ÇƒÖd zapisu!";
+                    MessageBox.Show(info, "B≈ÇƒÖd I/O");
                 }
                 else
                 {
@@ -3812,7 +3795,7 @@ namespace terminal
             if (status)
             {
                 status = gen_selling_from_sold(CSV_filename_tickets_series, CSV_delimiter, ref ticket_cash_people, ref ticket_cash_bike, ref ticket_cash_extra);
-                if ((File.Exists(CSV_filename_canceled_SD)) && status)  // jesli nie by≥o zwrotÛw to nie ma pliku anulowane
+                if ((File.Exists(CSV_filename_canceled_SD)) && status)  // if weren't canceled tickets - file is not exists!
                 {
                     status = gen_selling_from_sold(CSV_filename_canceled_SD, CSV_delimiter, ref cancel_ticket_cash_people, ref cancel_ticket_cash_bike, ref cancel_ticket_cash_extra);
                 }
@@ -3824,8 +3807,8 @@ namespace terminal
             this.panel4.Visible = false;
             this.panel13.Visible = true;
             double summing = earn_summary - return_summary;
-            this.summing_cash.Text = String.Format("{0:0.00}", summing) + " z≥";
-            this.summing_to_return.Text = String.Format("{0:0.00}", summing) + " z≥";
+            this.summing_cash.Text = String.Format("{0:0.00}", summing) + " z≈Ç";
+            this.summing_to_return.Text = String.Format("{0:0.00}", summing) + " z≈Ç";
             if (status)
             {
                 this.button51.Enabled = true;
@@ -3848,19 +3831,19 @@ namespace terminal
             }
             catch (Exception ej) // if entered value is wrong
             {
-                MessageBox.Show("Wprowadzono znaki nie bÍdπce liczbπ!\n\nkarta:" + ticket_cashless_pay + "obliczone: " + summing_calculated + "\n\n" + ej, "B£•D");
-                string tempstring = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "warning", curr_user, counter_series.ToString(), "Zakoncz zamkniecie zmiany - znaki nie bÍdπce liczba");
+                MessageBox.Show("Wprowadzono znaki nie bƒôdƒÖce liczbƒÖ!\n\nkarta:" + ticket_cashless_pay + "obliczone: " + summing_calculated + "\n\n" + ej, "B≈ÅƒÑD");
+                string tempstring = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "warning", curr_user, counter_series.ToString(), "Zakoncz zamkniecie zmiany - znaki nie bƒôdƒÖce liczba");
                 saveToFile(CSV_filename_logs, tempstring, false);
                 return;
             }
             /*
             if (summing_calculated < 0)
             {
-                MessageBox.Show("Kwota p≥atnoúci kartπ nie moøe byÊ wiÍksza niø zysk z biletÛw!", "Z≥a kwota");
+                MessageBox.Show("Kwota p≈Çatno≈õci kartƒÖ nie mo≈ºe byƒá wiƒôksza ni≈º zysk z bilet√≥w!", "Z≈Ça kwota");
                 return;
             }
             else connect it to else if*/ 
-            if (ticket_last == 0 && summing_cash_input.Text != "")  // zmiana zamknieta bez sprzedanego biletu = brak wydruku
+            if (ticket_last == 0 && summing_cash_input.Text != "")  // if this is empty selling  = dont print closing 
             {
                 bool_open_cash = false;
                 string temp_string;
@@ -3870,7 +3853,7 @@ namespace terminal
                 temp_string = vars_ToCSV(CSV_delimiter, counter_tickets.ToString(), counter_series.ToString(), bool_open_cash.ToString());
                 if (!saveToFile(CSV_filename_counters, temp_string, true))
                 {
-                    MessageBox.Show("B≥πd zapisu!", "B≥πd I/O");
+                    MessageBox.Show("B≈ÇƒÖd zapisu!", "B≈ÇƒÖd I/O");
                 }
                 this.panel4.Visible = false;
                 this.panel13.Visible = false;
@@ -3893,7 +3876,7 @@ namespace terminal
                 temp_string = vars_ToCSV(CSV_delimiter, counter_tickets.ToString(), counter_series.ToString(), bool_open_cash.ToString());
                 if (!saveToFile(CSV_filename_counters, temp_string, true))
                 {
-                    MessageBox.Show("B≥πd zapisu!\nZmiana nie moze zostaÊ poprawnie zamkniÍta.", "B≥πd I/O");
+                    MessageBox.Show("B≈ÇƒÖd zapisu!\nZmiana nie moze zostaƒá poprawnie zamkniƒôta.", "B≈ÇƒÖd I/O");
                     string tempstring = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "warning", curr_user, counter_series.ToString(), "Zakoncz zamkniecie zmiany - blad zapisu counters");
                     saveToFile(CSV_filename_logs, tempstring, false);
                     counter_series -= 1;    //if cannot save dont close
@@ -3910,7 +3893,7 @@ namespace terminal
             }
             else if (summing_cash_input.Text == "")
             { 
-                MessageBox.Show("Wprowadü kwotÍ p≥atnoúci kartπ","Brak podanej kwoty");
+                MessageBox.Show("Wprowad≈∫ kwotƒô p≈Çatno≈õci kartƒÖ","Brak podanej kwoty");
                 string temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "warning", curr_user, counter_series.ToString(), "Zakoncz zamkniecie zmiany - nie wprowadzono kwoty");
                 saveToFile(CSV_filename_logs, temp_string, false);
             }            
@@ -3924,12 +3907,12 @@ namespace terminal
                 {
                     double cash_entered = double.Parse(summing_cash_input.Text, CultureInfo.InvariantCulture);//.Replace('.', ','));
                     summing = earn_summary - return_summary - cash_entered;
-                    this.summing_to_return.Text = String.Format("{0:0.00}", summing) + " z≥";
+                    this.summing_to_return.Text = String.Format("{0:0.00}", summing) + " z≈Ç";
                     //MessageBox.Show(summing+"\n"+earn_summary+"\n"+return_summary, "\n"+cash_entered);
                 }
                 catch (Exception) // if entered value is wrong
                 {
-                    MessageBox.Show("Wprowadzono znaki nie bÍdπce liczbπ!", "B£•D");
+                    MessageBox.Show("Wprowadzono znaki nie bƒôdƒÖce liczbƒÖ!", "B≈ÅƒÑD");
                 }
             }
             else
@@ -3994,7 +3977,7 @@ namespace terminal
             }
             else
             {
-                info = "Nie uda≥o siÍ wydrukowaÊ!";
+                info = "Nie uda≈Ço siƒô wydrukowaƒá!";
                 tempstring = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "error", curr_user, counter_series.ToString(), "miesieczny - cennik " + info);
                 MessageBox.Show(info);
             }
@@ -4020,7 +4003,7 @@ namespace terminal
             }
             else
             {
-                info = "Nie uda≥o siÍ wydrukowaÊ!";
+                info = "Nie uda≈Ço siƒô wydrukowaƒá!";
                 MessageBox.Show(info);
             }
             tempstring = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), type, curr_user, counter_series.ToString(), "rower - cennik " + info);
@@ -4070,7 +4053,7 @@ namespace terminal
             }
             else
             {
-                info = "Nie uda≥o siÍ wydrukowaÊ!";
+                info = "Nie uda≈Ço siƒô wydrukowaƒá!";
                 MessageBox.Show(info);
                 temp_string = vars_ToCSV(CSV_delimiter, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "error", curr_user, counter_series.ToString(), "jednorazowy - cennik " + info);
             }
@@ -4099,7 +4082,7 @@ namespace terminal
             }
             else
             {
-                info = "Nie uda≥o siÍ wydrukowaÊ!";
+                info = "Nie uda≈Ço siƒô wydrukowaƒá!";
                 type = "warning";
                 MessageBox.Show(info);
                 
@@ -4127,7 +4110,7 @@ namespace terminal
             }
             else
             {
-                info = "Nie uda≥o siÍ wydrukowaÊ!";
+                info = "Nie uda≈Ço siƒô wydrukowaƒá!";
                 MessageBox.Show(info);
             }
             saveToFile(CSV_filename_logs, temp_string, false);
@@ -4152,7 +4135,7 @@ namespace terminal
             }
             else
             {
-                info = "Nie uda≥o siÍ wydrukowaÊ!";
+                info = "Nie uda≈Ço siƒô wydrukowaƒá!";
                 MessageBox.Show(info);
             }
             saveToFile(CSV_filename_logs, temp_string, false);
@@ -4235,7 +4218,7 @@ namespace terminal
             // to 65535
             public int BatteryVoltage;
             // Number of milliamps (mA) of instantaneous current drain. It can 
-            // range from 0 to 32767 for charge and 0 to ñ32768 for discharge. 
+            // range from 0 to 32767 for charge and 0 to ‚Äì32768 for discharge. 
             public int BatteryCurrent;
             //Number of milliseconds (mS) that is the time constant interval 
             // used in reporting BatteryAverageCurrent. 
@@ -4245,12 +4228,12 @@ namespace terminal
 
             public int BatteryAverageInterval;
             // Average number of milliamp hours (mAh) of long-term cumulative 
-            // average discharge. It can range from 0 to ñ32768. This value is 
+            // average discharge. It can range from 0 to ‚Äì32768. This value is 
             // reset when the batteries are charged or changed. 
 
             public int BatterymAHourConsumed;
             // Battery temperature reported in 0.1 degree Celsius increments. It 
-            // can range from ñ3276.8 to 3276.7. 
+            // can range from ‚Äì3276.8 to 3276.7. 
             public int BatteryTemperature;
             // Number of millivolts (mV) of backup battery voltage. It can range 
             // from 0 to 65535.
